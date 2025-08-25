@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1756147534 source:c:\users\isaac\onedrive\desktop\pruebastopicos\aye\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Pila/PilaEstatica.h"
+
+1755724314 source:c:\users\isaac\onedrive\desktop\pruebastopicos\aye\pila\pilaestatica.c
+	"PilaEstatica.h"
+
+1755723847 c:\users\isaac\onedrive\desktop\pruebastopicos\aye\pila\pilaestatica.h
+	<string.h>
+
+1756144452 source:c:\users\isaac\onedrive\desktop\pruebastopicos\aye\pila\pilahibrida.c
+	"PilaHibrida.h"
+
+1756143456 c:\users\isaac\onedrive\desktop\pruebastopicos\aye\pila\pilahibrida.h
+
+1756147591 source:c:\users\isaac\onedrive\desktop\pruebastopicos\aye\pila\pilaredimensionable.c
+	"PilaRedimensionable.h"
+
+1756147494 c:\users\isaac\onedrive\desktop\pruebastopicos\aye\pila\pilaredimensionable.h
+	<stdlib.h>
+
