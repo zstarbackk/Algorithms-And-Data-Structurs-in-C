@@ -22,15 +22,20 @@ int pushR(t_stack * pStack, const void * el, unsigned int elSize){
 }
 ///Peek the top element without removing it
 int peekR(t_stack * pStack, void * el, unsigned int elSize){
+    if(pStack->top == 0)
+        return 0;
     unsigned int auxTop = pStack->top;
     unsigned int stackElSize, auxSize;
     auxTop-=sizeof(unsigned int);
     memcpy(&stackElSize, pStack->stack+auxTop,sizeof(unsigned int));
     auxSize = MIN(elSize, stackElSize);
     memcpy(el, pStack->stack+auxSize, auxSize);
+    return 1;
 }
 ///
 int popR(t_stack * pStack, void * el, unsigned int elSize){
+    if(pStack->top==0)
+        return 0;
     unsigned int auxTop = pStack->top;
     unsigned int stackElSize, auxSize;
     auxTop-=sizeof(unsigned int);
@@ -38,6 +43,7 @@ int popR(t_stack * pStack, void * el, unsigned int elSize){
     auxSize = MIN(elSize, stackElSize);
     memcpy(el, pStack->stack+auxTop-auxSize, auxSize);
     pStack->top =auxTop-auxSize;
+    return 1;
 }
 ///
 int isEmptyR(t_stack * pStack){
