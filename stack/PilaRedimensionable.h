@@ -7,7 +7,7 @@ typedef struct{
     unsigned int top;
     unsigned int tam;
 }t_stack;
-int createStackR(t_stack * pStack);
+void createStackR(t_stack * pStack);
 ///Adds an element to the top of the Stack
 int pushR(t_stack * pStack, const void * el, unsigned int elSize);
 ///Peek the top element without removing it

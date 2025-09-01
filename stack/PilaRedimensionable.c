@@ -1,11 +1,8 @@
 #include "PilaRedimensionable.h"
-int createStackR(t_stack * pStack){
-    pStack->stack = malloc(100);
-    if(pStack->stack==0)
-        return -1;
+void createStackR(t_stack * pStack){
+    pStack->stack = NULL;
     pStack->top = 0;
-    pStack->tam = 100;
-    return 0;
+    pStack->tam = 0;
 }
 ///Adds an element to the top of the Stack
 int pushR(t_stack * pStack, const void * el, unsigned int elSize){
@@ -59,12 +56,19 @@ int eliminateStackR(t_stack * pStack){
 
 int resize(t_stack *pStack) {
     unsigned int tamAdd = (unsigned int)(pStack->tam * 0.5);
-
-    void *tmp = realloc(pStack->stack, pStack->tam + tamAdd);
-    if (tmp == 0)
-        return -1; // fallo al redimensionar
-
-    pStack->stack = tmp;
+    void *tmp;
+    if(pStack->stack == NULL){
+        pStack->stack=malloc(100);
+        if(pStack->stack==NULL)
+            return -1;
+        tamAdd = 100;
+    }
+    else{
+        tmp = realloc(pStack->stack, pStack->tam + tamAdd);
+        if (tmp == 0)
+            return -1; // fallo al redimensionar
+        pStack->stack = tmp;
+    }
     pStack->tam += tamAdd;
 
     return 0;

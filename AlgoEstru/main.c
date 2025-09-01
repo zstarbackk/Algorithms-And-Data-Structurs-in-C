@@ -2,7 +2,52 @@
 #include <stdlib.h>
 #include "../stack/PilaRedimensionable.h"
 #include "pruebas/testing.h"
-int main()
+#include "../queue/queue.h"
+#include "../queue/HybridQueue.h"
+int main(){
+    hybridQueueTest();
+}
+void hybridQueueTest(){
+    int readyEl, cant = 0;
+    t_person person;
+    FILE * pf = openFile("people.dat", "rb");
+    h_queue cola;
+    readyEl = readElement(pf,&person, readBin);
+    HQcreateQueue(&cola);
+    while(readyEl){
+        HQenqueue(&cola, &person, sizeof(t_person));
+        cant++;
+        readyEl = readElement(pf, &person, readBin);
+    }
+    while(HQdequeue(&cola, &person, sizeof(t_person))){
+        printf("Persona %i: %d\t%s\t%c\n",
+               cant, person.id, person.username,person.rol);
+        cant--;
+    }
+    HQqueueClear(&cola);
+    closeFile(pf);
+}
+void staticQueueTest(){
+    int readyEl, cant = 0;
+    t_person person;
+    FILE * pf = openFile("people.dat", "rb");
+    t_queue cola;
+    readyEl = readElement(pf,&person, readBin);
+    SQcreateQueue(&cola);
+    while(readyEl){
+        SQenqueue(&cola, &person, sizeof(t_person));
+        cant++;
+        readyEl = readElement(pf, &person, readBin);
+    }
+    while(SQdequeue(&cola, &person, sizeof(t_person))){
+        printf("Persona %i: %d\t%s\t%c\n",
+               cant, person.id, person.username,person.rol);
+        cant--;
+    }
+    SQqueueClear(&cola);
+    closeFile(pf);
+}
+void RedimensionableStack()
 {
     int readyEl, cant = 0;
     t_person person;
