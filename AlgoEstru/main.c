@@ -1,13 +1,59 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../stack/PilaRedimensionable.h"
+
+#include "../dynamic/stack.h"
+#include "../dynamic/queue.h"
 #include "pruebas/testing.h"
-#include "../queue/queue.h"
-#include "../queue/HybridQueue.h"
 int main(){
-    hybridQueueTest();
+    createTest();
+    printf("---------------------------------\n\Stack\n",
+           "---------------------------------");
+    dynamicStackTest();
+    printf("---------------------------------\n\tQueue\n",
+           "---------------------------------");
+    dynamicQueueTest();
 }
-void hybridQueueTest(){
+void dynamicStackTest(){
+    int readyEl, cant = 0;
+    t_person person;
+    FILE * pf = openFile("people.dat", "rb");
+    t_stack pila;
+    readyEl = readElement(pf,&person, readBin);
+    createStackDS(&pila);
+    while(readyEl){
+        pushDS(&pila, &person, sizeof(t_person));
+        cant++;
+        readyEl = readElement(pf, &person, readBin);
+    }
+    while(popDS(&pila, &person, sizeof(t_person))){
+        printf("Persona %i: %d\t%20s %c\n",
+               cant, person.id, person.username,person.rol);
+        cant--;
+    }
+    clearStackDS(&pila);
+    closeFile(pf);
+}
+void dynamicQueueTest(){
+    int readyEl, cant = 0;
+    t_person person;
+    FILE * pf = openFile("people.dat", "rb");
+    d_queue cola;
+    readyEl = readElement(pf,&person, readBin);
+    createQueueDQ(&cola);
+    while(readyEl){
+        enqueueDQ(&cola, &person, sizeof(t_person));
+        cant++;
+        readyEl = readElement(pf, &person, readBin);
+    }
+    while(dequeueDQ(&cola, &person, sizeof(t_person))){
+        printf("Persona %i: %d\t%20s %c\n",
+               cant, person.id, person.username,person.rol);
+        cant--;
+    }
+    queueClearDQ(&cola);
+    closeFile(pf);
+}
+/*void hybridQueueTest(){
     int readyEl, cant = 0;
     t_person person;
     FILE * pf = openFile("people.dat", "rb");
@@ -67,4 +113,4 @@ void RedimensionableStack()
     }
     eliminateStackR(&pila);
     closeFile(pf);
-}
+}*/
